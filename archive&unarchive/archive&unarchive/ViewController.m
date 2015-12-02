@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Person.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    Person *p = [NSKeyedUnarchiver unarchiveObjectWithFile:@"/Users/luoriver/Desktop/luo.plist"];
+    
+    NSLog(@"%@, %tu", p.name, p.age);
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    Person *p = [[Person alloc] init];
+    p.name = @"老王";
+    p.age = 11;
+    
+    [NSKeyedArchiver archiveRootObject:p toFile:@"/Users/luoriver/Desktop/luo.plist"];
 }
 
 - (void)didReceiveMemoryWarning {
